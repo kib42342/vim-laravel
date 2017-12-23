@@ -1,0 +1,572 @@
+"NeoBundle Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=/home/allpass/.vim/bundle/neobundle.vim/
+
+" Required:
+call neobundle#begin(expand('/home/allpass/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Add or remove your Bundles here:
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'flazz/vim-colorschemes'
+
+" You can specify revision/branch/tag.
+NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+
+" HTML5
+NeoBundle 'othree/html5.vim'
+NeoBundle 'plasticboy/vim-markdown'
+
+" Laravel5 plugins
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'tpope/vim-projectionist'
+NeoBundle 'noahfrederick/vim-composer'
+NeoBundle 'noahfrederick/vim-laravel'
+NeoBundle 'jwalton512/vim-blade'
+
+" Nerdtree 檔案樹狀列表
+NeoBundle 'scrooloose/nerdtree'
+
+" Easymotion 快速移動
+NeoBundle 'easymotion/vim-easymotion'
+
+" airlinerefresh 
+NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
+
+" php ide plugins
+
+NeoBundle "austintaylor/vim-commaobject"
+NeoBundle "tristen/vim-sparkup"
+"NeoBundle "othree/html5.vim"
+NeoBundle "tpope/vim-repeat"
+NeoBundle "tpope/vim-surround"
+NeoBundle "wikitopian/hardmode"
+NeoBundle "airblade/vim-gitgutter"
+NeoBundle "tpope/vim-fugitive"
+NeoBundle "rking/ag.vim"
+NeoBundle "sirver/ultisnips"
+NeoBundle "mjacobus/vim-snippets"
+NeoBundle "tomtom/tcomment_vim"
+"NeoBundle "Lokaltog/vim-easymotion"
+NeoBundle "yukunlin/auto-pairs"
+NeoBundle "mattn/gist-vim.git"
+"NeoBundle "scrooloose/nerdtree"
+"NeoBundle "kien/ctrlp.vim"
+NeoBundle "godlygeek/tabular"
+NeoBundle "scrooloose/syntastic"
+NeoBundle "weierophinney/argumentrewrap"
+NeoBundle "docteurklein/php-getter-setter.vim"
+NeoBundle "joonty/vdebug"
+NeoBundle "shawncplus/phpcomplete.vim"
+
+
+" Required:
+call neobundle#end()
+
+" Required:
+filetype off
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+"End NeoBundle Scripts-------------------------
+
+" VIM SETTING
+
+" traditonal chinese fileencoding
+set fileencodings=utf-8,ucs-bom,big5,cp950 
+set termencoding=utf-8
+set encoding=utf-8
+set confirm
+set showcmd
+
+" set leader
+let mapleader = ","
+
+
+" swap files out of the project root
+"set backupdir=~/vim/backup//
+"set directory=~/vim/swap//
+
+" run phpunit tests
+map <leader>t :!phpunit %<cr>
+
+set t_Co=256
+"colorscheme elda
+"colorscheme apprentice
+"colorscheme cduan
+colorscheme nerv-ous
+"colorscheme SlateDark
+"colorscheme xoria256
+
+
+" 為搜尋到的字加上高亮標示
+set hlsearch
+set ignorecase
+set incsearch
+
+" 縮排
+" Turn on auto-indent
+"       :set autoindent 
+" Turn on intelligent auto-indent
+"       :set smartindent 
+" Defines 4 spaces as indent size
+"       :set shiftwidth=4 
+" hitctrl-t, ctrl-d Indent/un-indent in insert mode
+" Indent
+" >>
+" Un-indent 
+" << 
+set smartindent
+
+
+" hit enter to cancel searched highlight 按《ENTER》取消高亮標示
+noremap <CR> :nohlsearch<CR>
+highlight Search cterm=underline
+
+" HIT F2 toggle NERDTREE
+nnoremap <silent> <F2> :NERDTreeToggle<CR><CR>k
+
+" HIT ,s on the word to replace the word
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+" 按F8為光標所的字進行全頁搜尋，並加上《》包圍該字
+nnoremap <expr> <F8> ':%s/\<'.expand('<cword>').'\>/<&>/g<CR>' 
+
+" select ALL
+map <C-A> ggVG
+
+" 按兩下; 進入行尾並以；結束
+inoremap ;; <ESC>$i<RIGHT>;
+
+" Insert mode 打 CTRL＋a 文件全選
+inoremap <C-A> <ESC>ggVG
+
+" yahoo線上字典(已無法使用）
+" (Project link) http://code.google.com/p/ydict/
+" normal mode 打K（大寫）或CTRL+k
+" Insert mode CTRL+k 
+"set keywordprg=~/.vim/ydict
+"inoremap <C-K> <ESC>K
+"map <C-K> K
+
+" sdcv字典 按K會自動用sdcv查詢資料
+set keywordprg=sdcv\ -u\ 懶蟲簡明英漢詞典
+
+
+" 為當前光標所在之行加入底線加強提示
+set cursorline
+
+" 顯示行數
+set nu
+
+" 顯示狀態列
+set laststatus=2
+
+
+" <<<折疊代碼>>>
+" 設定參數：
+" manual //手工定義
+" indent //用縮進表示
+" expr //用表達式
+" syntax //用語法高亮
+" diff //對沒有更改的文本進行折疊
+" marker //用標志折疊
+"
+" 折疊處輸入命令說明：
+" zc 折疊
+" zC 對所在范圍內所有嵌套的折疊點進行折疊
+" zo 展開折疊
+" zO 對所在范圍內所有嵌套的折疊點進行展開
+" [z 到當前打開的折疊的開始處
+" ]z 到當前打開的折疊的末尾處
+" zj 向下移動．到達下一個折疊的開始處．關閉的折疊也被計入
+" zk 向上移動．到前一折疊處．關閉的折疊也被計入
+"
+" marker 折疊方式說明：
+" default marker is  和 
+" zf 創建折疊，
+"    zf56G ，建立當前行起到56行的代碼折疊
+"    10zf 10zf+ 10zfj ，建立當前行起到後10行的代碼折疊
+"    10zf- zf10k ，建立當前行起到之前10行的代碼折疊
+"    在括號處 zf% ，建立當前行起到對應的匹配的括號上去（ (),{},[],<>等 ）
+" zd 刪除在光標下的折疊．ONLY FOR "foldmethod" set "manual" OR "marker"
+" zD 循環刪除在光標下的折疊，嵌套刪除折疊．ONLY FOR "foldmethod" set "manual" OR "marker"
+" zE 除去窗口裡"所有"的折疊．ONLY FOR "foldmethod" set "manual" OR "marker"
+"set foldmethod=manual
+"set foldmethod=indent
+"set foldmethod=expr
+"set foldmethod=syntax
+"set foldmethod=diff
+set foldmethod=marker
+
+" 使用模板
+" 新增模版以副檔案為檔名置於templates資料夾中
+au BufNewFile * :silent! exec ":0r ".$HOME."/.vim/templates/".&ft
+
+" 其他常用指令介紹
+" <normal mode>
+"    u : undo , back to last change
+"    U : undo , not actually a true undo , it back to last change and create a new step
+"    CTRL+R : redo a previously undone change
+"    . : repeat a previous change
+"    <C-U> 向上翻半頁
+"    <C-D> 向下翻半頁
+"    <C-B> 回上一頁
+"    <C-F> 至下一頁
+"    z. : 光標所在行置中
+"    zt : 光標所在行置頂
+"    zb : 光標所在行置底
+"    shift+h : 光標移至本頁頁頂
+"    shift+m : 光標移至本頁頁中
+"    shift+l : 光標移至本頁頁底
+" 
+" <input mode>
+" zencoding使用
+" ex1: html:xss>div#header+div#container>ul>li.class{<ctrl+y+,> OR <CTRL+E>}
+" ex2: 
+" ----------------------
+"      test1
+"      test2
+"      test3
+" ----------------------
+"      在normal
+"      mode中使用SHIFT＋V選取三行，按《CTRL＋Y＋,》或《CTRL＋E》在命令欄輸入
+"      ul>li*<enter>
+"      即可變成
+" ----------------------
+"      <ul>
+"        <li>test1</li>
+"        <li>test2</li>
+"        <li>test3</li>
+"      </ul>
+" ----------------------
+" ex3:標籤內選擇<CTRL+y>d
+" ex4:標籤外選擇<CTRL+y>D
+" ex5:轉到下一個編輯點<CTRL+Y>n
+" ex6:轉到上一個編輯點<CTRL+Y>N
+" ex7:更新IMG TAG圖片的大小（圖必須在本地VIM能讀得到的地方）{<CTRY+Y>i}
+" ----------------------
+"     <img src="foo.png">光標移到IMG TAG然後按<CTRY+Y>i
+"     <img src="foo.png" height="48" width="32">
+" 
+" ex8:多行合併，光標選擇要合併的行數後按《SHIFT＋J》即可合為一行
+"
+" ex9:刪除標籤{<c-y>k}：
+" ----------------------
+"      <div class="foo">
+"      <a>光標在這</a>
+"      </div>
+"      按下 <c-y>k 就變成
+"      <div class="foo"></div>
+" ----------------------
+"
+"  ex10:分割組合標籤{<c-y>j}
+" ----------------------
+"      <div class="foo">
+"      <a>光標在這</a>
+"      </div>
+"      按下 <c-y>j 就變成
+"      <div class="foo"/>
+"      再按下 <c-y>j 就變成
+"      <div class="foo"></div>
+" ----------------------
+"       
+" ex11:注解{<CTRY+Y>/}
+" ----------------------
+"      <div>
+"        hello world
+"      </div>
+"     光標移至此塊代碼，按<CTRY+Y>/
+"      <!--<div>
+"        hello world
+"      </div>-->
+" ----------------------
+"
+" ex12:自動給網址加上連結（LINK）的TAG{<CTRL+Y>a}
+"      不支援BIG5<title>
+" ----------------------
+"     光標移動到網址上http://tw.yahoo.com按下<ctrl+y>a
+"     <a href="http://tw.yahoo.com">Yahoo!奇摩</a>
+" ----------------------
+"
+" ex13:給網址添加注解文本{<ctrl+y><shift+a>}
+" ----------------------
+"     光標移動到網址上http://github.com按下<ctrl+y><shift+a>
+"     <blockquote class="quote">
+"          <a href="http://github.com/">Secure source code hosting and
+"          collaborative development - GitHub</a>
+"           How does it work? Get up and running in seconds by forking a
+"           project, pushing an existing repository...
+"           <cite>http://github.com/</cite>
+"     </blockquote>"
+" ----------------------
+"     
+" ex14:以BINARY MODE開啟檔案
+"     :%!xxd      以二進制模式開啟
+"     :%!xxd -r   返回原檔案模式
+"
+
+
+
+" 修正zencoding 在純TERMINAL介面無法使用CTRL+y+,的功能，改使用CTRL+E
+  let g:user_emmet_settings = {
+			  \   'indentation' : '  ',
+   			  \   'perl' : {
+   			  \     'aliases' : {
+   			  \       'req' : 'require '
+   			  \     },
+   			  \     'snippets' : {
+   			  \       'use' : "use strict\nuse warnings\n\n",
+   			  \       'warn' : "warn \"|\";",
+   			  \     }
+   			  \   }
+   			  \ }
+  
+  let g:user_emmet_expandabbr_key = '<C-E>'
+  let g:use_emmet_complete_tag = 1
+
+  " airline 
+  " :bn 跳下一個buffer
+  " :bp 跳上一個buffer
+  " :b n 跳行第n個buffer
+  " :bd 關掉目前buffer
+  " 開檔 vi -b a b 可同時打開a,b兩檔
+  " bufdo! %s/abc/ABC/g 可同時把buffer裡的a,b檔案內容同時更動
+  " bufdo!w! 可同時把buffer裡的檔案儲存
+nmap <Ctrl><TAB> :bn<CR>
+  if !exists('g:airline_symbols')
+	    let g:airline_symbols = {}
+    endif
+
+" powerline 
+set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+set nocompatible
+let g:minBufExplForceSyntaxEnable = 1
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+set guifont=Source\ Code\ Pro\ for\ Powerline:h12 
+set noshowmode
+" powerline (fancy thingy at bottom stuff)
+  "let g:airline_theme = 'molokai'
+  "let g:airline_theme = 'base16'
+  "let g:airline_theme = 'distinguished'
+  let g:airline_theme = 'wombat'
+  "let g:Powerline_symbols = 'fancy'
+  let g:Powerline_symbols = 'unicode'
+  let g:airline_powerline_fonts = 1
+
+  let g:airline_symbols.space = "\ua0"
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#left_sep = ' '
+  let g:airline#extensions#tabline#left_alt_sep = ' | '
+  let g:airline#extensions#tabline#buffer_nr_show = 1
+  set guifont=Literation_Mono_Powerline:h16
+  " unicode symbols
+  "let g:airline_left_sep = '»'
+  "let g:airline_left_sep = '▶'
+  "let g:airline_right_sep = '«'
+  "let g:airline_right_sep = '◀'
+  "let g:airline_symbols.crypt = '🔒'
+  "let g:airline_symbols.linenr = '␊'
+  "let g:airline_symbols.linenr = '␤'
+  "let g:airline_symbols.linenr = '¶'
+  "let g:airline_symbols.maxlinenr = '☰'
+  "let g:airline_symbols.maxlinenr = ''
+  "let g:airline_symbols.branch = '⎇'
+  "let g:airline_symbols.paste = 'ρ'
+  "let g:airline_symbols.paste = 'Þ'
+  "let g:airline_symbols.paste = '∥'
+  "let g:airline_symbols.spell = 'Ꞩ'
+  "let g:airline_symbols.notexists = '∄'
+  "let g:airline_symbols.whitespace = 'Ξ'
+
+  " powerline symbols
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ''
+
+" Mappings to access buffers (don't use "\p" because a
+" delay before pressing "p" would accidentally paste).
+" ,l       : list buffers
+" ,b ,f ,g : go back/forward/last-used
+" ,1 ,2 ,3 : go to buffer 1/2/3 etc
+nnoremap <Leader>l :ls<CR>
+nnoremap <Leader>b :bp<CR>
+nnoremap <Leader>d :bd<CR>
+nnoremap <Leader>f :bn<CR>
+nnoremap <Leader>g :e#<CR>
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
+" It's useful to show the buffer number in the status line.
+"set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+set ttimeoutlen=50
+
+
+
+" bufexplorer plugins
+" \be normal open buffer
+" \bs horizontal split open buffer
+" \bv vertical split open buffer
+
+" use Ngb to jump to buffer number N (a number from 1 to 99)
+" for example :typing 12gb would  jump to buffer 12
+let c = 1
+while c <= 99
+	  execute "nnoremap " . c . "gb :" . c . "b\<CR>"
+	    let c += 1
+    endwhile
+
+
+
+
+" 光標移動模式切換 <F5>
+" When ON(normal mode):
+" u : 光標向上移動半頁
+" d : 光標向下移動半頁
+" k : 光標所在行向上移動
+" j : 光標所在行向下移動
+  function! LessMode()
+	  if g:lessmode == 0
+		  let g:lessmode = 1
+		  let onoff = 'on'
+		  " Scroll half a page down
+		  noremap <script> d <C-D>
+		  " Scroll one line down
+		  noremap <script> j <C-E>
+		  " Scroll half a page up
+		  noremap <script> u <C-U>
+		  " Scroll one line up
+		  noremap <script> k <C-Y>
+	  else
+		  let g:lessmode = 0
+		  let onoff = 'off'
+		  unmap d
+		  unmap j
+		  unmap u
+		  unmap k
+	  endif
+	  echohl Label | echo "Less mode" onoff | echoh1 None
+  endfunction
+  let g:lessmode=0
+  nnoremap <F5> :call LessMode()<CR>
+  inoremap <F5> <Esc>:call LessMode()<CR>
+  
+" 按《TAB》自動補上關鍵字或FUNCTION
+"function! Smart_TabComplete()
+"	let line = getline('.')                         " current line
+"
+"	let substr = strpart(line, -1, col('.')+1)      " from the start of the	current
+"	" line to one character right
+"	" of the cursor
+"	let substr = matchstr(substr,"[^\t]*$")	"word till cursor
+"	if (strlen(substr)==0)	"nothing to match on empty string
+"		return	"\<tab>"
+"	endif
+"	let has_period = match(substr,'\.')!=-1	"position of period,if any
+"	let has_slash = match(substr,'\/')!=-1	"position of slash, if any
+"	if (!has_period	&& !has_slash)
+"		return	"\<C-X>\<C-P>"	"existing text	matching
+"	elseif (has_slash)
+"		return	"\<C-X>\<C-F>"	"file matching
+"	else
+"		return	"\<C-X>\<C-O>"	"plugin	matching
+"	endif
+"endfunction
+" inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+" set omnifunc=syntaxcomplete#Complete
+ function! CleverTab()
+ 	if pumvisible() 
+ 		return "\<C-N>"
+ 	endif
+ 	if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+ 		return "\<Tab>"
+ 	elseif exists('&omnifunc') && &omnifunc != ''
+ 		return "\<C-X>\<C-O>"
+ 	else
+ 		return "\<C-N>"
+ 	endif
+ endfunction
+ 
+ inoremap <Tab> <C-R>=CleverTab()<CR>
+ inoremap <Tab><Tab> <C-X><C-o>
+
+"inoremap <CR><CR> <ESC>o
+
+" Ctags : 安裝"sudo apt-get install ctags"
+" 生成tags文件,在源代碼的根目錄打入"ctags -R"
+" 源碼閱讀切換，打開任意源碼文件，<ctrl+]>即可跳至定義處
+" <CTRL+t> 即可跳回原文件
+set tags=tags;
+set autochdir
+
+" 啟用隨打自動補全功能
+let g:neocomplcache_enable_at_startup=1
+let g:neocomplcache_auto_completion_start_length=2
+" For input-saving, this variable controls whether you can  choose a candidate
+" with a alphabet or number displayed beside a candidate after '-'.  When you
+" input 'ho-a',  neocomplcache will select candidate 'a'
+" imap <expr> -  pumvisible() ? 
+" fast saves ,w
+nmap <leader>w :w!<cr>
+" fast quit ,q
+nmap <Leader>q :q!<CR>
+
+" easy escaping to normal mode
+imap jj <esc>
+
+" Auto change directory to match current file ,cd
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+
+" easier window navigation
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+nmap sp <C-w>n
+nmap spv <C-w>v
+
+
+" Load the current buffer in Chrome (for macos)
+nmap ,c :!open -a Google\ Chrome<cr> 
+" Load the current buffer in firefox(for macos)
+nmap ,f :!open -a firefox<cr> 
+
+" easy motion stuff
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_leader_key = '<Leader>'
+"let g:EasyMotion_startofline = 0 "keep cursor colum when JK motion
+map <Leader><Leader> <Plug>(easymotion-prefix)
+map <Leader><Leader>h <Plug>(easymotion-linebackward)
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+map <Leader><Leader>l <Plug>(easymotion-lineforward)
+map <Leader><Leader>. <Plug>(easymotion-repeat)
+map <Leader><Leader>r :AirlineRefresh<CR>
+
+
