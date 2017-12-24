@@ -40,9 +40,17 @@ NeoBundle 'scrooloose/nerdtree'
 " Easymotion 快速移動
 NeoBundle 'easymotion/vim-easymotion'
 
-" airlinerefresh 
+" airlinerefresh  在BUFFER裡跳轉
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
+
+" vim-signature 設置標簽，快速跳轉
+" m[a-zA-Z] 打標簽
+" '[a-zA-Z] 跳轉到標簽位置
+" '. 最後一次變更的地方
+" '' 跳回來的地方（最近二個位置跳轉）
+" m<space> 去除所有標簽
+NeoBundle 'kshenoy/vim-signature'
 
 " php ide plugins
 

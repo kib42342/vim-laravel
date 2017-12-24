@@ -30,6 +30,7 @@ vim-laravel
 vim-markdown
 vim-projectionist
 vim-repeat
+vim-signature
 vim-snippets
 vim-sparkup
 vim-surround
