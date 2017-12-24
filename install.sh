@@ -5,9 +5,10 @@
 
 # Installation directory
 BUNDLE_DIR=~/.vim/bundle
-INSTALL_DIR="$BUNDLE_DIR/neobundle.vim"
+INSTALL_DIR="$BUNDLE_DIR/neobundle.vim/"
 echo "$INSTALL_DIR"
 if [ -e "$INSTALL_DIR" ]; then
+	rm -fr $BUNDLE_DIR/*
   echo "$INSTALL_DIR already exists!"
 fi
 
@@ -16,6 +17,7 @@ NVIM_BUNDLE_DIR="$NVIM_DIR/bundle"
 NVIM_INSTALL_DIR="$NVIM_BUNDLE_DIR/neobundle.vim"
 echo "$NVIM_INSTALL_DIR"
 if [ -e "$NVIM_INSTALL_DIR" ]; then
+	rm -fr $BUNDLE_DIR/*
   echo "$NVIM_INSTALL_DIR already exists!"
 fi
 
