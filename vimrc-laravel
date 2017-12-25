@@ -4,10 +4,10 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/home/allpass/.vim/bundle/neobundle.vim/
+set runtimepath+=/home/kdk/.vim/bundle/neobundle.vim/
 
 " Required:
-call neobundle#begin(expand('/home/allpass/.vim/bundle'))
+call neobundle#begin(expand('/home/kdk/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -532,6 +532,9 @@ while c <= 99
 " <CTRL+t> 即可跳回原文件
 set tags=tags;
 set autochdir
+
+" sdcv字典 按K會自動用sdcv查詢資料
+set keywordprg=sdcv\ -u\ 懶蟲簡明英漢詞典
 
 " 啟用隨打自動補全功能
 let g:neocomplcache_enable_at_startup=1
